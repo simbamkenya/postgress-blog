@@ -1,19 +1,9 @@
 const dbConfig = require('../config/db.config')
 const Sequelize = require('sequelize')
 
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-    host: dbConfig.HOST,
-    dialect: dbConfig.dialect,
+const sequelize = new Sequelize('postgres://rxmpxcko:WHAuwM7-U2nz1wDShG3H1e2aqh2VWc7o@heffalump.db.elephantsql.com/rxmpxcko')
 
-    pool: {
-        max: dbConfig.pool.max,
-        min: dbConfig.pool.min,
-        acquire: dbConfig.pool.acquire,
-        idle: dbConfig.pool.idle
-    }
-})
-
-const db= {};
+const db = {};
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
