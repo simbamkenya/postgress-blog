@@ -3,12 +3,12 @@ const app = express();
 const ejs = require('ejs');
 const Sequelize = require('sequelize')
 
-require('./routes/post.routes')(app)
-
 app.use(express.json())
 app.use(express.urlencoded({ extended: true}))
 app.use(express.static(__dirname + '/public'))
 app.set('view engine', 'ejs')
+
+require('./routes/post.routes')(app)
 
 const db = require('./models')
 db.sequelize.sync().then(() => console.log('db connected'))
