@@ -72,12 +72,14 @@ exports.update = async (req, res) => {
 }
 
 //delete a specific post with id
-exports.delete = (req, res) => {
+exports.delete = async (req, res) => {
     const id = req.params.id;
     
-    Post.destroy({
+    const post = await Post.destroy({
         where: { id:id }
     })
+    res.status(200).send(post)
+    
 
 }
 
@@ -87,4 +89,6 @@ exports.deleteAll = (req, res) => {
         where: {},
         truncate: false
     })
+
+    res.status(200).send('deletedpost')
 }
