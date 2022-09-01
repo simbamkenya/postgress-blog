@@ -75,10 +75,10 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
     const id = req.params.id;
     
-    const post = await Post.destroy({
+    Post.destroy({
         where: { id:id }
     })
-    res.status(200).send(post)
+    res.status(200).send('post deleted')
     
 
 }

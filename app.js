@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/public'))
 app.set('view engine', 'ejs')
 
 const errorHandling = (err, req, res, next) => {
-    res.status(500).json({
+    res.status(500).send({
         msg: err.message,
         success: false
     })
