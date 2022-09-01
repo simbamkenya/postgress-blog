@@ -45,12 +45,29 @@ exports.findOne = async (req, res) => {
 }
 
 //update a post by id
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
     const id = req.params.id;
 
-    Post.update(req.body, {
+      //validate request
+      const schema = Joi.object({
+        title: Joi.string().required(),
+        description: Joi.string().required().min(20),
+    })
+
+    const { error } = schema.validate(req.body)
+    if(error) return res.status(400).send(error.details[0].message)
+
+    //create a post
+    const post = {
+        title: req.body.title,
+        description: req.body.description
+    }
+
+    const updatePost = await Post.update(req.body, {
         where: { id: id}
     })
+
+    res.status(200).send(updatePost)
 
 }
 
