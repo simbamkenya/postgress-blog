@@ -14,14 +14,15 @@ exports.create = async (req, res) => {
     const { error } = schema.validate(req.body)
     if(error) return res.status(400).send(error.details[0].message)
 
-
     //create a post
     const post = {
         title: req.body.title,
         description: req.body.description
     }
     //save post
-    Post.create(post)
+    await Post.create(post)
+
+    res.status(200).send(post)
 
 }
 
@@ -37,9 +38,10 @@ exports.findAll = async (req, res) => {
 
 
 //find a single post with an id
-exports.findOne = (req, res) => {
+exports.findOne = async (req, res) => {
     const id = req.params.id;
-    Post.findByPk(id)
+    const post = await Post.findByPk(id)
+    res.status(200).send(post)
 }
 
 //update a post by id

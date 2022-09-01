@@ -19,9 +19,8 @@ module.exports = app => {
     router.delete('/:id', posts.delete)
 
     //deleting a post
-    router.delete('id', posts.deleteAll)
+    router.delete('/', posts.deleteAll)
 
     app.use('/api/posts', router)
-
 
 }
