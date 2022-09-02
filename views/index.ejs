@@ -30,8 +30,16 @@
         
         <div>
             <h1 class="article-title">Title</h1>
-            <a href="/articles/new" class="btn">New Article</a>
-            <h1>Post</h1>
+            <a href="/api/posts/new" class="btn">New Post</a>
+            
+            <% posts.forEach(post => { %>
+                <div class="single-post">
+                   <h1> <b><%=post.title %></b></h1> 
+                   <hr/>
+                    <!-- post.createdAt.toLocaleDateString()   -->
+                    <%= post.description %>  
+                </div>
+            <% }) %> 
         </div>
         <footer class="footer">
             <p>&copy; Copyright  2021. Conestoga College.</p>

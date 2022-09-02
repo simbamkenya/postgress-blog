@@ -3,6 +3,10 @@ const Post = db.posts;
 const Op = db.Sequelize.Op;
 const Joi = require('joi')
 
+exports.f = (req,res) => {
+    res.render('/create')
+}
+
 //creating and save new post
 exports.create = async (req, res) => {
     //validate request
@@ -22,17 +26,20 @@ exports.create = async (req, res) => {
     //save post
     await Post.create(post)
 
-    res.status(200).send(post)
+    res.redirect('/api/posts/postlist')
 
 }
-
+//show form
+exports.new = async (req, res) => {
+    res.render('new')
+}
 //fetch all posts from db
 exports.findAll = async (req, res) => {
     const title = req.query.title;
     let condition = title ? { title: { [Op.isLike]: `%${title}%`} } : null;
 
-    const posts = await Post.findAll({ where: condition })
-    res.send(posts)
+    const posts = await Post.findAll({ where: { } })
+    res.render('index', { posts: posts })
 
 }
 

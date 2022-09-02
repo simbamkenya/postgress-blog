@@ -4,10 +4,13 @@ module.exports = app => {
     const router = require('express').Router();
 
     //creating a new post
-    router.post('/', posts.create)
+    router.post('/create', posts.create)
+
+    //show form 
+    router.get('/new', posts.new)
 
     //fetch all posts
-    router.get('/', posts.findAll)
+    router.get('/postlist', posts.findAll)
 
     //retrieving a single post by id
     router.get('/:id', posts.findOne)
